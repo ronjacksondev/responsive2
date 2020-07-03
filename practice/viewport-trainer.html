@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport">
+        <title>Viewport Trainer</title>
+        <script>
+            function toggleViewport(){
+                var viewportMeta = document.querySelector('meta');
+                var viewportCheckbox = document.querySelector('#viewportCheckbox');
+                if(viewportMeta.hasAttribute('content')){
+                    viewportMeta.removeAttribute('content');
+                    viewportCheckbox.checked = false;
+                } else {
+                    viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0');
+                    viewportCheckbox.checked = true;
+                }
+            }
+
+            function displayViewportLog(){
+                const viewportLog = document.querySelector('#viewportLog');
+
+                const documentElementWidth = document.createElement('div');
+                documentElementWidth.appendChild(document.createTextNode('documentElement=' + document.documentElement.clientWidth));
+                viewportLog.insertBefore(documentElementWidth, viewportLog.firstChild);
+
+                const innerWidth = document.createElement('div');
+                innerWidth.appendChild(document.createTextNode('window.innerWidth=' + window.innerWidth))
+                viewportLog.insertBefore(innerWidth, viewportLog.firstChild);
+            }
+
+            document.addEventListener('DOMContentLoaded', function(){
+                var viewportButton = document.getElementById('toggleViewport');
+                viewportButton.addEventListener('click', toggleViewport);
+
+                var viewportLogButton = document.getElementById('displayViewportLog');
+                viewportLogButton.addEventListener('click', displayViewportLog);
+            });
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>Viewport Trainer</h1>
+        </header>
+        <section>
+            <div>
+                <input id="toggleViewport" type="button" value="toggle viewport">
+                <input id="viewportCheckbox" type="checkbox" disabled=true>
+            </div>
+            <div>
+                <input id="displayViewportLog" type="button" value="Display viewport Log">
+            </div>
+            <div>
+                <div id="viewportLog"></div>
+            </div>
+        </section>
+
+    </body>
+</html>
