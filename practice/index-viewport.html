@@ -5,6 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>App Name</title>
         <link rel="stylesheet" href="layout.css">
+        <script>
+            function displayViewportLog(){
+                const viewportLog = document.querySelector('#viewportLog');
+
+                const documentElementWidth = document.createElement('div');
+                documentElementWidth.appendChild(document.createTextNode('documentElement=' + document.documentElement.clientWidth));
+                viewportLog.insertBefore(documentElementWidth, viewportLog.firstChild);
+
+                const innerWidth = document.createElement('div');
+                innerWidth.appendChild(document.createTextNode('window.innerWidth=' + window.innerWidth))
+                viewportLog.insertBefore(innerWidth, viewportLog.firstChild);
+            }
+
+            document.addEventListener('DOMContentLoaded', function(){
+                displayViewportLog();
+            });
+        </script>
     </head>
     <body>
         <header>
@@ -30,7 +47,7 @@
             </ul>
         </aside>
         <footer>
-            I am a footer
+            <div id="viewportLog"></div>
         </footer>
     </body>
 </html>
